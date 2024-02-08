@@ -6,17 +6,17 @@ import { AppMaterialModule } from '../../shared/app-material/app-material.module
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
 import { CategoriaPipe } from '../../shared/pipes/categoria.pipe';
 import { Aluno } from '../model/aluno';
-import { AlunosService } from './../services/alunos.service';
+import { AlunosService } from '../services/alunos.service';
 
 
 @Component({
-  selector: 'app-list-alunos',
-  templateUrl: './list-alunos.component.html',
-  styleUrl: './list-alunos.component.scss',
+  selector: 'app-alunos-list',
+  templateUrl: './alunos-list.component.html',
+  styleUrl: './alunos-list.component.scss',
   standalone: true,
   imports: [AppMaterialModule, CategoriaPipe],
 })
-export class ListAlunosComponent implements OnInit {
+export class AlunosListComponent implements OnInit {
 
   public alunos$: Observable<Aluno[]>;
 
@@ -29,7 +29,7 @@ export class ListAlunosComponent implements OnInit {
     this.alunos$ = alunosService.listaAlunos()
     .pipe(
       catchError(error => {
-        this.onError('Erroa ao carregar');
+        this.onError('Erro ao carregar');
         return of([])
       })
     );

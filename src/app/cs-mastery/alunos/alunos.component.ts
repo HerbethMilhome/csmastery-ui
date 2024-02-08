@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppMaterialModule } from '../../shared/app-material/app-material.module';
-import { ListAlunosComponent } from '../list-alunos/list-alunos.component';
+import { AlunosListComponent } from '../alunos-list/alunos-list.component';
 
 @Component({
   selector: 'app-alunos',
   templateUrl: './alunos.component.html',
   styleUrl: './alunos.component.scss',
   standalone: true,
-  imports: [AppMaterialModule,ListAlunosComponent],
+  imports: [AppMaterialModule,AlunosListComponent],
 })
 export class AlunosComponent {
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Aluno } from '../model/aluno';
 import { HttpClient } from '@angular/common/http';
-import { delay, first, tap } from 'rxjs';
+import { first, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
