@@ -2,5 +2,5 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'alunos'},
-  { path: 'alunos', loadChildren: () => import('./list-alunos/list-alunos.module').then(m => m.ListAlunosModule)}
+  { path: 'alunos', loadChildren: () => import('./cs-mastery/cs-mastery.module').then(m => m.CsMasteryModule)}
 ];
