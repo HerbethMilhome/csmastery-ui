@@ -1,5 +1,6 @@
-table {
-  width: 100%;
+mat-table {
+  overflow: auto;
+  max-height: 600px;
 }
 
 .loadin-spineer {
@@ -8,4 +9,12 @@ table {
   justify-content: center;
   background: rgba($color: #e7e7e7, $alpha: 1.0);
   padding: 25px;
+}
+
+.action-column {
+  flex: 0 0 112px;
+}
+
+.action-column-header {
+  flex: 0 0 112px;
 }
