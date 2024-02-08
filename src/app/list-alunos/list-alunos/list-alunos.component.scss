@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+
+.loadin-spineer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba($color: #e7e7e7, $alpha: 1.0);
+  padding: 25px;
+}
