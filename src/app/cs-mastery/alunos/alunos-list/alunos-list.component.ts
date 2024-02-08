@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { catchError, Observable, of } from 'rxjs';
 
-import { AppMaterialModule } from '../../shared/app-material/app-material.module';
-import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
-import { CategoriaPipe } from '../../shared/pipes/categoria.pipe';
-import { Aluno } from '../model/aluno';
-import { AlunosService } from '../services/alunos.service';
+import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
+import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
+import { CategoriaPipe } from '../../../shared/pipes/categoria.pipe';
+import { Aluno } from '../../model/aluno';
+import { AlunosService } from '../../services/alunos.service';
 
 
 @Component({

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AlunoFormComponent } from './aluno-form/aluno-form.component';
+import { AlunoFormComponent } from './alunos/aluno-form/aluno-form.component';
 import { AlunosComponent } from './alunos/alunos.component';
 
 const routes: Routes = [

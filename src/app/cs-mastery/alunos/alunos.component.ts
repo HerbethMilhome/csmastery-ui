@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppMaterialModule } from '../../shared/app-material/app-material.module';
-import { AlunosListComponent } from '../alunos-list/alunos-list.component';
+import { AlunosListComponent } from './alunos-list/alunos-list.component';
 
 @Component({
   selector: 'app-alunos',

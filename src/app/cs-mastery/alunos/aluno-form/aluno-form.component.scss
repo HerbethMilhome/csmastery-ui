@@ -1,0 +1,38 @@
+.full-width {
+  width: 100%;
+}
+
+mat-card {
+  max-width: 97%;
+  margin: 2em auto;
+}
+
+.min-width {
+  width: 100%;
+  min-width: 150px;
+}
+
+.padding-raised-button {
+  padding-left: 15px;
+}
+
+.margin-right-button {
+  margin-right: 8px;
+}
+
+.margin-fields-1em {
+  margin: 1em;
+}
+
+.width-400 {
+  min-width: 150px;
+  width: 400px;
+}
+
+.width-16em {
+  min-width: 16em;
+}
+
+.width-5em {
+  width: 5em;
+}
