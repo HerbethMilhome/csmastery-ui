@@ -1,7 +1,7 @@
 <mat-card>
 
   <mat-toolbar color="primary">
-    Detalhes do aluno
+    Cadastro do aluno
   </mat-toolbar>
 
   <mat-card-content>
@@ -23,24 +23,16 @@
       </mat-form-field>
 
       <mat-form-field class="margin-fields-1em">
-        <mat-label>CPF</mat-label>
-        <input matInput #cpf maxlength="11" placeholder="123.456.789-00" formControlName="cpf">
-        @if (requiredFormControl.hasError('required')) {
-          <mat-error>CPF é <strong>Obrigatório</strong></mat-error>
-        }
-        <mat-hint align="end">{{cpf.value.length}}/11</mat-hint>
-      </mat-form-field>
-
-      <mat-form-field class="margin-fields-1em">
         <mat-label>Telefone</mat-label>
-        <input matInput maxlength="11" #telefone placeholder="(11) 12345-6789" formControlName="telefone">
+        <input matInput #telefone placeholder="(11) 12345-6789" formControlName="telefone" mask="(00) 00000-0000">
         @if (requiredFormControl.hasError('required')) {
           <mat-error>Telefone é <strong>Obrigatório</strong></mat-error>
         }
-        <mat-hint align="end">{{telefone.value.length}}/11</mat-hint>
       </mat-form-field>
 
-      <div>
+      <mat-checkbox class="example-margin" color="primary" formControlName="mentoria" (change)="checkMentoria()">Mentoria</mat-checkbox>
+
+      <div *ngIf="isMentoria">
         <mat-form-field class="margin-fields-1em width-400" >
           <mat-label>Nome Sócio</mat-label>
           <input matInput placeholder="Nome" formControlName="nome_socio">
@@ -48,56 +40,28 @@
 
         <mat-form-field class="margin-fields-1em width-16em" >
           <mat-label>E-mail Sócio</mat-label>
-          <input matInput #cpf maxlength="11" placeholder="123.456.789-00" formControlName="email_socio">
-          <mat-hint align="end">{{cpf.value.length}}/11</mat-hint>
+          <input matInput formControlName="email_socio">
         </mat-form-field>
 
         <mat-form-field class="margin-fields-1em" >
           <mat-label>Telefone Sócio</mat-label>
-          <input matInput maxlength="11" #telefone placeholder="(11) 12345-6789" formControlName="telefone_socio">
-          <mat-hint align="end">{{telefone.value.length}}/11</mat-hint>
+          <input matInput placeholder="(11) 12345-6789" formControlName="telefone_socio" mask="(00) 00000-0000">
         </mat-form-field>
       </div>
 
-      <mat-form-field class="margin-fields-1em" >
-        <mat-label>Situação Financeiro</mat-label>
-        <mat-select formControlName="status_financeiro">
-          <mat-option></mat-option>
-          <mat-option value="Adimplente">Adimplente</mat-option>
-          <mat-option value="Inadimplente">Inadimplente</mat-option>
-          <mat-option value="Renegociação">Renegociação</mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div>
+        <mat-form-field class="margin-fields-1em width-400" >
+          <mat-label>Responsável</mat-label>
+          <input matInput placeholder="Nome" formControlName="responsavel">
+        </mat-form-field>
 
-      <mat-form-field class="margin-fields-1em width-5em" >
-        <mat-label>Nota</mat-label>
-        <input matInput placeholder="10" formControlName="nota_acompanhamento">
-      </mat-form-field>
-
-      <mat-form-field class="margin-fields-1em" >
-        <mat-label>Satisfação</mat-label>
-        <input matInput placeholder="Nota" formControlName="satisfacao">
-      </mat-form-field>
-
-      <mat-form-field class="margin-fields-1em width-400" >
-        <mat-label>Responsável</mat-label>
-        <input matInput placeholder="Nome" formControlName="responsavel">
-      </mat-form-field>
-
-      <mat-form-field class="margin-fields-1em" >
-        <mat-label>Data de Entrada</mat-label>
-        <input matInput [matDatepicker]="dp3" formControlName="data_entrada">
-        <mat-datepicker-toggle matIconSuffix [for]="dp3"></mat-datepicker-toggle>
-        <mat-datepicker #dp3 disabled="false"></mat-datepicker>
-      </mat-form-field>
-
-      <!-- <mat-form-field>
-        <mat-label>Data de Entrada</mat-label>
-        <input matInput [matDatepicker]="data_entrada" disabled>
-        <mat-datepicker-toggle matIconSuffix [for]="data_entrada"></mat-datepicker-toggle>
-        <mat-datepicker #data_entrada disabled="false"></mat-datepicker>
-      </mat-form-field> -->
-
+        <mat-form-field class="margin-fields-1em" >
+          <mat-label>Data de Entrada</mat-label>
+          <input matInput [matDatepicker]="data_entrada" formControlName="data_entrada">
+          <mat-datepicker-toggle matIconSuffix [for]="data_entrada"></mat-datepicker-toggle>
+          <mat-datepicker #data_entrada disabled="false"></mat-datepicker>
+        </mat-form-field>
+      </div>
 
     </form>
   </mat-card-content>

@@ -4,9 +4,7 @@
 
     <ng-container matColumnDef="nome">
       <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-      <mat-cell *matCellDef="let aluno"> {{ aluno.nome }}
-        <mat-icon aria-hidden="false" aria-label="Teste de icones">{{ aluno.nome | categoria }}</mat-icon>
-      </mat-cell>
+      <mat-cell *matCellDef="let aluno"> {{ aluno.nome }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="email">
@@ -14,23 +12,23 @@
       <mat-cell *matCellDef="let aluno"> {{ aluno.email }} </mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="cpf">
-      <mat-header-cell *matHeaderCellDef> CPF </mat-header-cell>
-      <mat-cell *matCellDef="let aluno"> {{ aluno.cpf }} </mat-cell>
-    </ng-container>
-
     <ng-container matColumnDef="telefone">
       <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
       <mat-cell *matCellDef="let aluno"> {{ aluno.telefone }} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="data_entrada">
+      <mat-header-cell *matHeaderCellDef> Data de Entrada </mat-header-cell>
+      <mat-cell *matCellDef="let aluno"> {{ aluno.data_entrada | date: 'dd/MM/yyyy' }} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="actions">
       <mat-header-cell class="action-column" *matHeaderCellDef> Ações </mat-header-cell>
       <mat-cell *matCellDef="let aluno" class="action-column">
-        <button mat-icon-button color="primary" aria-label="Editar Aluno">
+        <button mat-icon-button color="primary" aria-label="Editar Aluno" (click)="onEdit(aluno)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" aria-label="Excluir Aluno">
+        <button mat-icon-button color="warn" aria-label="Excluir Aluno" (click)="onDelete()">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

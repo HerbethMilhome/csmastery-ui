@@ -7,6 +7,7 @@ import { ErrorDialogComponent } from '../../../shared/components/error-dialog/er
 import { CategoriaPipe } from '../../../shared/pipes/categoria.pipe';
 import { Aluno } from '../../model/aluno';
 import { AlunosService } from '../../services/alunos.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -20,11 +21,13 @@ export class AlunosListComponent implements OnInit {
 
   public alunos$: Observable<Aluno[]>;
 
-  readonly displayedColumns: string[] = ['nome', 'email', 'cpf', 'telefone', 'actions'];
+  readonly displayedColumns: string[] = ['nome', 'email', 'telefone', 'data_entrada', 'actions'];
 
   constructor(
     private alunosService: AlunosService,
     private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
     ) {
     this.alunos$ = alunosService.listaAlunos()
     .pipe(
@@ -43,6 +46,14 @@ export class AlunosListComponent implements OnInit {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMensagem
     });
+  }
+
+  onEdit(aluno: Aluno) {
+    this.router.navigate(['edit', aluno.id], {relativeTo: this.route});
+  }
+
+  onDelete() {
+
   }
 
 }

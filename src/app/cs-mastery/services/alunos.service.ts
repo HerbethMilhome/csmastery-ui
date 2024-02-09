@@ -23,8 +23,15 @@ export class AlunosService {
   }
 
   save(aluno: Aluno) {
-    console.log(aluno);
     return this.http.post<Aluno>(this.API, aluno).pipe(first());
+  }
+
+  updade(aluno: Aluno) {
+    return this.http.put<Aluno>(this.API, aluno).pipe(first());
+  }
+
+  getById(id: string) {
+    return this.http.get<Aluno>(`${this.API}/${id}`).pipe(first());
   }
 
 }

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -27,7 +28,8 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatInputModule,
     MatSelectModule,
     MatSnackBarModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatCheckboxModule
   ],
 })
 export class AppMaterialModule { }
