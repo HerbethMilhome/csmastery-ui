@@ -1,3 +1,4 @@
+import { Endereco } from './endereco';
 import { Data } from '@angular/router';
 
 export interface Aluno {
@@ -24,4 +25,6 @@ export interface Aluno {
   mentoria: number;
   ciclo_matricula: number;
   renovado: number;
+  removido: number;
+  endereco?: Endereco;
 }

@@ -14,7 +14,7 @@
 
     <ng-container matColumnDef="telefone">
       <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
-      <mat-cell *matCellDef="let aluno"> {{ aluno.telefone }} </mat-cell>
+      <mat-cell *matCellDef="let aluno" mask="(00) 00000-0000"> {{ aluno.telefone }} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="data_entrada">
@@ -28,7 +28,7 @@
         <button mat-icon-button color="primary" aria-label="Editar Aluno" (click)="onEdit(aluno)">
           <mat-icon>edit</mat-icon>
         </button>
-        <button mat-icon-button color="warn" aria-label="Excluir Aluno" (click)="onDelete()">
+        <button mat-icon-button color="warn" aria-label="Excluir Aluno" (click)="onDelete(aluno)">
           <mat-icon>delete</mat-icon>
         </button>
       </mat-cell>

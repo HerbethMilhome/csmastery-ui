@@ -22,4 +22,8 @@ export class AlunosComponent {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
 
+  ende() {
+    this.router.navigate(['endereco'], {relativeTo: this.route});
+  }
+
 }

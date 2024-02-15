@@ -1,6 +1,7 @@
+import { Endereco } from './../../model/endereco';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable, delay, of } from 'rxjs';
 
 import { Aluno } from '../../model/aluno';
 import { AlunosService } from '../../services/alunos.service';
@@ -22,7 +23,17 @@ export class AlunoResolver  {
               telefone_socio: '', status_financeiro: '', nota_acompanhamento: '', satisfacao: '', responsavel: '',
               data_entrada: Date, data_criacao: Date, data_renovacao: Date, data_ultimo_contrato: Date,
               data_ultimo_acompanhamento: Date, data_proximo_contato: Date, vigencia_contrato: 0,
-              ultima_resposta: 0, mentoria: 0, ciclo_matricula: 0, renovado: 0 });
+              ultima_resposta: 0, mentoria: 0, ciclo_matricula: 0, renovado: 0, removido: 0,
+              endereco: {
+                id: '',
+                logradouro: '',
+                numero: '',
+                complemento: '',
+                bairro: '',
+                cidade: '',
+                estado: '',
+                cep: ''
+              } }).pipe(delay(0));
 
   }
 }

@@ -34,4 +34,8 @@ export class AlunosService {
     return this.http.get<Aluno>(`${this.API}/${id}`).pipe(first());
   }
 
+  delete(id: string) {
+    return this.http.delete<Aluno>(`${this.API}/delete/${id}`).pipe(first());
+  }
+
 }

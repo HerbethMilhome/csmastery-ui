@@ -1,0 +1,8 @@
+<h2 mat-dialog-title>Atenção</h2>
+<mat-dialog-content>
+  <p>{{ data }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button class="margin-r14" color="warn" cdkFocusInitial (click)="onConfirm(true)">Sim</button>
+  <button mat-raised-button (click)="onConfirm(false)">Não</button>
+</mat-dialog-actions>

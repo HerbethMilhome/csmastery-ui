@@ -1,0 +1,44 @@
+
+<div [formGroup]="formEndereco">
+
+  <mat-form-field class="margin-fields-1em width-400">
+    <mat-label>Logradouro</mat-label>
+    <input matInput placeholder="logradouro" formControlName="logradouro" >
+    <mat-error *ngIf="formEndereco.get('logradouro')?.invalid">{{getErrorMesasge('logradouro')}}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="margin-fields-1em" >
+    <mat-label>Número</mat-label>
+    <input matInput placeholder="123a" formControlName="numero" >
+  </mat-form-field>
+
+  <mat-form-field class="margin-fields-1em">
+    <mat-label>Complemento</mat-label>
+    <input matInput placeholder="bem ali assim" formControlName="complemento" >
+  </mat-form-field>
+
+  <div>
+    <mat-form-field class="margin-fields-1em width-400" >
+      <mat-label>Bairro</mat-label>
+      <input matInput placeholder="Bairro" formControlName="bairro">
+    </mat-form-field>
+
+    <mat-form-field class="margin-fields-1em">
+      <mat-label>Cidade</mat-label>
+      <input matInput placeholder="Cidade" formControlName="cidade" >
+      <mat-error *ngIf="formEndereco.get('cidade')?.invalid">{{getErrorMesasge('cidade')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="margin-fields-1em">
+      <mat-label>Estado</mat-label>
+      <input matInput placeholder="Estado" formControlName="estado" >
+      <mat-error *ngIf="formEndereco.get('estado')?.invalid">{{getErrorMesasge('estado')}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="margin-fields-1em">
+      <mat-label>CEP</mat-label>
+      <input matInput placeholder="00.000-000" formControlName="cep" mask="00.000-000" >
+      <mat-error *ngIf="formEndereco.get('cep')?.invalid">{{getErrorMesasge('cep')}}</mat-error>
+    </mat-form-field>
+  </div>
+</div>

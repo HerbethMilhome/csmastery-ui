@@ -1,13 +1,13 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
-import { FloatLabelType } from '@angular/material/form-field';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
+import { EnderecoFormComponent } from '../../enderecos/endereco-form/endereco-form.component';
 import { Aluno } from '../../model/aluno';
 import { AlunosService } from '../../services/alunos.service';
 
@@ -16,17 +16,14 @@ import { AlunosService } from '../../services/alunos.service';
   templateUrl: './aluno-form.component.html',
   styleUrl: './aluno-form.component.scss',
   standalone: true,
-  imports: [AppMaterialModule,ReactiveFormsModule, NgxMaskDirective],
+  imports: [AppMaterialModule, ReactiveFormsModule, NgxMaskDirective, EnderecoFormComponent],
   providers: [provideNativeDateAdapter(), provideNgxMask(), { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }]
 })
 export class AlunoFormComponent implements OnInit{
 
-  floatLabelControl = new FormControl('auto' as FloatLabelType);
-  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  requiredFormControl = new FormControl('', [Validators.required]);
-
-  readonly form: FormGroup;
+  readonly form!: FormGroup;
   isMentoria: boolean = false;
+  painelEndereco = false;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
@@ -37,7 +34,7 @@ export class AlunoFormComponent implements OnInit{
   ) {
     this.form = this.formBuilder.group({
       id: [''],
-      nome: ['', [Validators.required]],
+      nome: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       email: ['', [Validators.required, Validators.email]],
       cpf: [''],
       telefone: ['', [Validators.required]],
@@ -58,7 +55,18 @@ export class AlunoFormComponent implements OnInit{
       ultima_resposta: [null],
       mentoria: [0],
       ciclo_matricula: [null],
-      renovado: [0]
+      renovado: [0],
+      removido: [0],
+      endereco: this.formBuilder.group({
+        id: [''],
+        logradouro: [''],
+        numero: [''],
+        complemento: [''],
+        bairro: [''],
+        cidade: [''],
+        estado: [''],
+        cep: ['']
+      })
     });
    }
 
@@ -74,8 +82,23 @@ export class AlunoFormComponent implements OnInit{
       telefone_socio: aluno.telefone_socio,
       responsavel: aluno.responsavel,
       data_entrada: aluno.data_entrada,
-      mentoria: aluno.mentoria
+      mentoria: aluno.mentoria,
     });
+
+    const enderecoFormGroup = this.form.get('endereco') as FormGroup;
+    if (enderecoFormGroup) {
+      enderecoFormGroup.patchValue({
+        id: aluno.endereco?.id,
+        logradouro: aluno.endereco?.logradouro,
+        numero: aluno.endereco?.numero,
+        complemento: aluno.endereco?.complemento,
+        bairro: aluno.endereco?.bairro,
+        cidade: aluno.endereco?.cidade,
+        estado: aluno.endereco?.estado,
+        cep: aluno.endereco?.cep
+      });
+    }
+
     if(this.form.value.mentoria) {
       this.isMentoria = true;
     }
@@ -133,10 +156,6 @@ export class AlunoFormComponent implements OnInit{
     this.snackBar.open(message, action, { duration: 5000 });
   }
 
-  getFloatLabelValue(): FloatLabelType {
-    return this.floatLabelControl.value || 'auto';
-  }
-
   checkMentoria() {
     const mentoria = this.form.get('mentoria');
     this.isMentoria = mentoria?.value;
@@ -148,6 +167,30 @@ export class AlunoFormComponent implements OnInit{
       this.form.get('email_socio')?.setValue('');
       this.form.get('telefone_socio')?.setValue('');
     }
+  }
+
+  getErrorMesasge(campo: string) {
+    const field = this.form.get(campo);
+
+    if (field?.hasError('required')) {
+      return 'Campo obrigatório'
+    }
+
+    if (field?.hasError('minlength')) {
+      const minino = field.errors ? field.errors['minlength']['requiredLength'] : 5;
+      return 'Necessário pelo menos ' + minino + ' caracteres.'
+    }
+
+    if (field?.hasError('maxlength')) {
+      const minino = field.errors ? field.errors['maxlength']['requiredLength'] : 100;
+      return 'Tamanho máximo excedido de ' + minino + ' caracteres.'
+    }
+
+    if (field?.hasError('email')) {
+      return 'E-mail inválido'
+    }
+
+    return 'Campo Invalido';
   }
 
 }
