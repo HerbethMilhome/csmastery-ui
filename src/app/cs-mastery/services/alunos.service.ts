@@ -18,7 +18,7 @@ export class AlunosService {
     return this.http.get<Aluno[]>(this.API)
     .pipe(
       first(),
-      tap(a => console.log(a))
+      tap()
     );
   }
 

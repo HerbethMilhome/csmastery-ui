@@ -1,10 +1,9 @@
-import { Endereco } from './../../model/endereco';
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable, delay, of } from 'rxjs';
+import { delay, Observable, of } from 'rxjs';
 
-import { Aluno } from '../../model/aluno';
-import { AlunosService } from '../../services/alunos.service';
+import { Aluno } from '../../../model/aluno';
+import { AlunosService } from '../../../services/alunos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +14,6 @@ export class AlunoResolver  {
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Aluno> {
     if (route.params && route.params['id']) {
-      console.log('resolver por id ', this.service.getById(route.params['id']));
       return this.service.getById(route.params['id']);
     }
 

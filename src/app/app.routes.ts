@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { DashboardComponent } from './cs-mastery/dashboard/dashboard.component';
+import { DashboardComponent } from './cs-mastery/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard'},

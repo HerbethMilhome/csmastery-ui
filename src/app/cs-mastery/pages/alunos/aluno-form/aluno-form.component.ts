@@ -6,17 +6,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
-import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
-import { EnderecoFormComponent } from '../../enderecos/endereco-form/endereco-form.component';
-import { Aluno } from '../../model/aluno';
-import { AlunosService } from '../../services/alunos.service';
+import { AppMaterialModule } from '../../../../shared/app-material/app-material.module';
+import { Aluno } from '../../../model/aluno';
+import { AlunosService } from '../../../services/alunos.service';
 
 @Component({
   selector: 'app-aluno-form',
   templateUrl: './aluno-form.component.html',
   styleUrl: './aluno-form.component.scss',
   standalone: true,
-  imports: [AppMaterialModule, ReactiveFormsModule, NgxMaskDirective, EnderecoFormComponent],
+  imports: [AppMaterialModule, ReactiveFormsModule, NgxMaskDirective],
   providers: [provideNativeDateAdapter(), provideNgxMask(), { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }]
 })
 export class AlunoFormComponent implements OnInit{
@@ -109,7 +108,6 @@ export class AlunoFormComponent implements OnInit{
       this.service.updade(this.form.value)
       .subscribe(
         data => {
-          console.log(data),
           this.openSnackBar(
             'Aluno cadastrado com sucess!.',
             'Fechar'
@@ -117,7 +115,6 @@ export class AlunoFormComponent implements OnInit{
             this.onCancel();
         },
         error => {
-          console.log(error.error.message);
           let mensagem = error.error.message.split('Detalhe: ')[1]?.split(']')[0];
           this.openSnackBar(
             'Erro ao salvar. Motivo: ' + mensagem,
@@ -129,7 +126,6 @@ export class AlunoFormComponent implements OnInit{
       this.service.save(this.form.value)
       .subscribe(
         data => {
-          console.log(data),
           this.openSnackBar(
             'Aluno cadastrado com sucess!.',
             'Fechar'
@@ -137,7 +133,6 @@ export class AlunoFormComponent implements OnInit{
             this.onCancel();
         },
         error => {
-          console.log(error.error.message);
           let mensagem = error.error.message.split('Detalhe: ')[1]?.split(']')[0];
           this.openSnackBar(
             'Erro ao salvar. Motivo: ' + mensagem,
