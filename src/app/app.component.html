@@ -1,4 +1,18 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" class="mat-elevation-z3">
+  <button mat-icon-button (click)="collapsed.set(!collapsed())" >
+      <mat-icon class="mat-18">menu</mat-icon>
+  </button>
+
   <span>CSMastery</span>
 </mat-toolbar>
-<router-outlet></router-outlet>
+
+<mat-sidenav-container>
+  <mat-sidenav opened mode="side" [style.width]="sidenavWidth()">
+    <app-custom-sidenav [collapsed]="collapsed()"></app-custom-sidenav>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="content" [style.margin-left]="sidenavWidth()">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
