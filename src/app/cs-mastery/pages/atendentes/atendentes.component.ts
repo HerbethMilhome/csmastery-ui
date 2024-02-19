@@ -2,24 +2,23 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
-import { AlunosListComponent } from './alunos-list/alunos-list.component';
-
+import { AtendenteListComponent } from './atendente-list/atendente-list.component';
 
 @Component({
-  selector: 'app-alunos',
-  templateUrl: './alunos.component.html',
-  styleUrl: './alunos.component.scss',
+  selector: 'app-atendentes',
+  templateUrl: './atendentes.component.html',
+  styleUrl: './atendentes.component.scss',
   standalone: true,
-  imports: [AppMaterialModule, AlunosListComponent],
+  imports: [AppMaterialModule, AtendenteListComponent]
 })
-export class AlunosComponent {
+export class AtendentesComponent {
 
   constructor(
     private router: Router,
     private route: ActivatedRoute
   ){ }
 
-  newAluno() {
+  newAtendente() {
     this.router.navigate(['new'], {relativeTo: this.route});
   }
 

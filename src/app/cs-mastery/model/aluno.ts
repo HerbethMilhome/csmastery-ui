@@ -1,3 +1,4 @@
+import { Atendente } from './atendente';
 import { Endereco } from './endereco';
 import { Data } from '@angular/router';
 
@@ -13,7 +14,6 @@ export interface Aluno {
   status_financeiro: string;
   nota_acompanhamento: string;
   satisfacao: string;
-  responsavel: string;
   data_entrada: Data;
   data_criacao: Data;
   data_renovacao: Data;
@@ -27,4 +27,5 @@ export interface Aluno {
   renovado: number;
   removido: number;
   endereco?: Endereco;
+  atendente: Atendente;
 }

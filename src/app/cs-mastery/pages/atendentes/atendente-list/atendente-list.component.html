@@ -1,0 +1,41 @@
+
+<div *ngIf="atendentes$ | async as atendentes; else loading">
+  <mat-table [dataSource]="atendentes" >
+
+    <ng-container matColumnDef="nome">
+      <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+      <mat-cell *matCellDef="let atendente"> {{ atendente.nome }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef> E-mail </mat-header-cell>
+      <mat-cell *matCellDef="let atendente"> {{ atendente.email }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="telefone">
+      <mat-header-cell *matHeaderCellDef> Telefone </mat-header-cell>
+      <mat-cell *matCellDef="let atendente" mask="(00) 00000-0000"> {{ atendente.telefone }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <mat-header-cell class="action-column" *matHeaderCellDef> Ações </mat-header-cell>
+      <mat-cell *matCellDef="let atendente" class="action-column">
+        <button mat-icon-button color="primary" aria-label="Editar Atendente" (click)="onEdit(atendente)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" aria-label="Excluir Atendente" (click)="onDelete(atendente)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>
+
+<ng-template #loading>
+  <div class="loadin-spineer">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

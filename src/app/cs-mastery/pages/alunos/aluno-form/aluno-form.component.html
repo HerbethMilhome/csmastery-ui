@@ -26,7 +26,7 @@
 
         <mat-form-field class="margin-fields-1em">
           <mat-label>Telefone</mat-label>
-          <input matInput #telefone placeholder="(11) 12345-6789" formControlName="telefone" mask="(00) 00000-0000">
+          <input matInput #telefone placeholder="(00) 00000-0000" formControlName="telefone" mask="(00) 00000-0000">
           <mat-error *ngIf="form.get('telefone')?.invalid">Telefone é <strong>Obrigatório</strong></mat-error>
         </mat-form-field>
 
@@ -51,8 +51,12 @@
 
         <div>
           <mat-form-field class="margin-fields-1em width-400" >
-            <mat-label>Responsável</mat-label>
-            <input matInput placeholder="Nome" formControlName="responsavel">
+            <mat-label>Atendente</mat-label>
+            <mat-select [(value)]="selectedAtendente" >
+              <mat-option *ngFor="let atend of atendentes" [value]="atend.id">
+                {{ atend.nome }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
 
           <mat-form-field class="margin-fields-1em" >

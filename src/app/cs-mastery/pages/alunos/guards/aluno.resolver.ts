@@ -18,7 +18,7 @@ export class AlunoResolver  {
     }
 
     return of({ id: '', nome: '', email: '', cpf: '', telefone: '', nome_socio: '', email_socio: '',
-              telefone_socio: '', status_financeiro: '', nota_acompanhamento: '', satisfacao: '', responsavel: '',
+              telefone_socio: '', status_financeiro: '', nota_acompanhamento: '', satisfacao: '',
               data_entrada: Date, data_criacao: Date, data_renovacao: Date, data_ultimo_contrato: Date,
               data_ultimo_acompanhamento: Date, data_proximo_contato: Date, vigencia_contrato: 0,
               ultima_resposta: 0, mentoria: 0, ciclo_matricula: 0, renovado: 0, removido: 0,
@@ -31,7 +31,14 @@ export class AlunoResolver  {
                 cidade: '',
                 estado: '',
                 cep: ''
-              } }).pipe(delay(0));
+              },
+              atendente: {
+                id: '',
+                nome: '',
+                email: '',
+                telefone: '',
+                alunos: []
+              }, }).pipe(delay(0));
 
   }
 }

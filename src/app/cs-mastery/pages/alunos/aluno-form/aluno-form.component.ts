@@ -1,3 +1,4 @@
+import { Atendente } from './../../../model/atendente';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
@@ -9,6 +10,7 @@ import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { AppMaterialModule } from '../../../../shared/app-material/app-material.module';
 import { Aluno } from '../../../model/aluno';
 import { AlunosService } from '../../../services/alunos.service';
+import { AtendenteService } from '../../../services/atendente.service';
 
 @Component({
   selector: 'app-aluno-form',
@@ -23,10 +25,13 @@ export class AlunoFormComponent implements OnInit{
   readonly form!: FormGroup;
   isMentoria: boolean = false;
   painelEndereco = false;
+  atendentes: Atendente[] = [];
+  selectedAtendente: string = '';
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private service: AlunosService,
+    private atendenteService: AtendenteService,
     private snackBar: MatSnackBar,
     private location: Location,
     private route: ActivatedRoute
@@ -43,7 +48,7 @@ export class AlunoFormComponent implements OnInit{
       status_financeiro: [''],
       nota_acompanhamento: [''],
       satisfacao: [''],
-      responsavel: [''],
+      atendente: [''],
       data_entrada: [null],
       data_criacao: [null],
       data_renovacao: [null],
@@ -79,7 +84,7 @@ export class AlunoFormComponent implements OnInit{
       nome_socio: aluno.nome_socio,
       email_socio: aluno.email_socio,
       telefone_socio: aluno.telefone_socio,
-      responsavel: aluno.responsavel,
+      atendente: aluno.atendente,
       data_entrada: aluno.data_entrada,
       mentoria: aluno.mentoria,
     });
@@ -98,9 +103,27 @@ export class AlunoFormComponent implements OnInit{
       });
     }
 
+    const atendenteFormGroup = this.form.get('atendente') as FormGroup;
+    if (atendenteFormGroup) {
+      atendenteFormGroup.patchValue({
+        id: aluno.atendente?.id,
+        nome: aluno.atendente?.nome,
+        telefone: aluno.atendente?.telefone,
+        email: aluno.atendente?.email
+      });
+
+      this.selectedAtendente = atendenteFormGroup.value.id;
+
+    }
+
     if(this.form.value.mentoria) {
       this.isMentoria = true;
     }
+
+    this.atendenteService.listaAtendentes()
+    .subscribe(result => {
+      this.atendentes = result;
+    });
   }
 
   onSubmit() {
@@ -109,7 +132,7 @@ export class AlunoFormComponent implements OnInit{
       .subscribe(
         data => {
           this.openSnackBar(
-            'Aluno cadastrado com sucess!.',
+            'Aluno cadastrado com sucesso!',
             'Fechar'
             );
             this.onCancel();
@@ -127,7 +150,7 @@ export class AlunoFormComponent implements OnInit{
       .subscribe(
         data => {
           this.openSnackBar(
-            'Aluno cadastrado com sucess!.',
+            'Aluno cadastrado com sucesso!',
             'Fechar'
             );
             this.onCancel();

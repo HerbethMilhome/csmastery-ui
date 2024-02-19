@@ -1,0 +1,17 @@
+<mat-card>
+  <mat-card-content>
+
+    <p>
+      <button (click)="newAtendente()" mat-raised-button color="primary" aria-label="Adicionar Atendente">
+        <mat-icon>add</mat-icon> Adicionar
+      </button>
+    </p>
+
+    <mat-toolbar color="primary">Atendentes - CS</mat-toolbar>
+
+    <div class="column-flex mat-elevation-z8">
+      <app-atendente-list></app-atendente-list>
+    </div>
+
+  </mat-card-content>
+</mat-card>
