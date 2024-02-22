@@ -1,4 +1,3 @@
-import { Atendente } from './../../../model/atendente';
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
@@ -11,6 +10,7 @@ import { AppMaterialModule } from '../../../../shared/app-material/app-material.
 import { Aluno } from '../../../model/aluno';
 import { AlunosService } from '../../../services/alunos.service';
 import { AtendenteService } from '../../../services/atendente.service';
+import { Atendente } from './../../../model/atendente';
 
 @Component({
   selector: 'app-aluno-form',
@@ -48,7 +48,7 @@ export class AlunoFormComponent implements OnInit{
       status_financeiro: [''],
       nota_acompanhamento: [''],
       satisfacao: [''],
-      atendente: [''],
+      atendente: ['', [Validators.required]],
       data_entrada: [null],
       data_criacao: [null],
       data_renovacao: [null],
@@ -124,6 +124,11 @@ export class AlunoFormComponent implements OnInit{
     .subscribe(result => {
       this.atendentes = result;
     });
+
+  }
+
+  onAtendenteChange(event: any): void {
+    this.form.get('atendente')?.setValue(event.value);
   }
 
   onSubmit() {
@@ -172,6 +177,10 @@ export class AlunoFormComponent implements OnInit{
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, { duration: 5000 });
+  }
+
+  disableSave() {
+    return this.form.invalid || this.selectedAtendente.length == 0;
   }
 
   checkMentoria() {

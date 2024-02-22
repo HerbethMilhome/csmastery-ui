@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AtendenteResolver } from '../alunos/guards/atendente.resolver';
+import { AtendenteResolver } from '../../guards/atendente.resolver';
 import { AtendenteFormComponent } from './atendente-form/atendente-form.component';
 import { AtendentesComponent } from './atendentes.component';
 

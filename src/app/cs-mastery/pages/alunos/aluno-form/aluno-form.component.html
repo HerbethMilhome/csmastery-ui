@@ -52,7 +52,7 @@
         <div>
           <mat-form-field class="margin-fields-1em width-400" >
             <mat-label>Atendente</mat-label>
-            <mat-select [(value)]="selectedAtendente" >
+            <mat-select [(value)]="selectedAtendente" (selectionChange)="onAtendenteChange($event)" [required]="true">
               <mat-option *ngFor="let atend of atendentes" [value]="atend.id">
                 {{ atend.nome }}
               </mat-option>
@@ -125,7 +125,7 @@
   </mat-card-content>
 
   <mat-card-actions class="padding-raised-button">
-    <button mat-raised-button class="margin-right-button" color="primary" [disabled]="form.invalid" (click)="onSubmit()">Salvar</button>
+    <button mat-raised-button class="margin-right-button" color="primary" [disabled]="disableSave()" (click)="onSubmit()">Salvar</button>
     <button mat-raised-button class="margin-right-button" (click)="onCancel()">Cancelar</button>
   </mat-card-actions>
 

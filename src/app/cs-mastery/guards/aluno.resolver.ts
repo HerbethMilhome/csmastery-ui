@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { delay, Observable, of } from 'rxjs';
 
-import { Aluno } from '../../../model/aluno';
-import { AlunosService } from '../../../services/alunos.service';
+import { Aluno } from '../model/aluno';
+import { AlunosService } from '../services/alunos.service';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,14 @@ export class AlunoResolver  {
                 email: '',
                 telefone: '',
                 alunos: []
-              }, }).pipe(delay(0));
+              },
+              situacao_financeira: {
+                id: '',
+                nome: '',
+                descricao: '',
+                cor: ''
+              }
+            }).pipe(delay(0));
 
   }
 }

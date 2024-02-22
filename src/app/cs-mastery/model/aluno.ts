@@ -1,6 +1,8 @@
+import { Data } from '@angular/router';
+
 import { Atendente } from './atendente';
 import { Endereco } from './endereco';
-import { Data } from '@angular/router';
+import { SituacaoFinanceira } from './situacao-financeira';
 
 export interface Aluno {
   id: string;
@@ -11,7 +13,6 @@ export interface Aluno {
   nome_socio: string;
   email_socio: string;
   telefone_socio: string;
-  status_financeiro: string;
   nota_acompanhamento: string;
   satisfacao: string;
   data_entrada: Data;
@@ -28,4 +29,5 @@ export interface Aluno {
   removido: number;
   endereco?: Endereco;
   atendente: Atendente;
+  situacao_financeira: SituacaoFinanceira;
 }

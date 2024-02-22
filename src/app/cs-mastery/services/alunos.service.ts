@@ -1,7 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Aluno } from '../model/aluno';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { first, tap } from 'rxjs';
+
+import { Aluno } from '../model/aluno';
 
 @Injectable({
   providedIn: 'root'

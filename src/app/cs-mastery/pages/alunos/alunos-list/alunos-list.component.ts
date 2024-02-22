@@ -6,7 +6,9 @@ import { NgxMaskDirective } from 'ngx-mask';
 import { catchError, Observable, of } from 'rxjs';
 
 import { AppMaterialModule } from '../../../../shared/app-material/app-material.module';
-import { ConfirmationDialogComponent } from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
+import {
+  ConfirmationDialogComponent,
+} from '../../../../shared/components/confirmation-dialog/confirmation-dialog.component';
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { CategoriaPipe } from '../../../../shared/pipes/categoria.pipe';
 import { Aluno } from '../../../model/aluno';

@@ -1,4 +1,3 @@
-import { Aluno } from './../../../model/aluno';
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
@@ -9,6 +8,7 @@ import { NgxMaskDirective } from 'ngx-mask';
 import { AppMaterialModule } from '../../../../shared/app-material/app-material.module';
 import { Atendente } from '../../../model/atendente';
 import { AtendenteService } from '../../../services/atendente.service';
+import { Aluno } from './../../../model/aluno';
 
 @Component({
   selector: 'app-atendente-form',

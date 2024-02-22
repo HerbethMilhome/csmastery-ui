@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { delay, Observable, of } from 'rxjs';
-import { AtendenteService } from '../../../services/atendente.service';
-import { Atendente } from '../../../model/atendente';
+import { AtendenteService } from '../services/atendente.service';
+import { Atendente } from '../model/atendente';
 
 @Injectable({
   providedIn: 'root'
