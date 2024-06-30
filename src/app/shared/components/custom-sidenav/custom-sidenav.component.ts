@@ -1,7 +1,7 @@
-import { Component, Input, computed, signal } from '@angular/core';
+import { Component, computed, Input, OnInit, signal } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { AppMaterialModule } from '../../app-material/app-material.module';
-import {  RouterModule } from '@angular/router';
 
 export type MenuItem = {
   icon?: string;
@@ -17,12 +17,22 @@ export type MenuItem = {
   templateUrl: './custom-sidenav.component.html',
   styleUrl: './custom-sidenav.component.scss'
 })
-export class CustomSidenavComponent {
+export class CustomSidenavComponent implements OnInit {
 
   sidenavCollapsed = signal(false);
+
   @Input() set collapsed(val: boolean) {
     this.sidenavCollapsed.set(val);
   }
+
+  @Input() userLogin: string | null = '';
+
+  @Input() perfil: string | null = '';
+
+  ngOnInit(): void {
+    this.userLogin  = localStorage.getItem('userLogin');
+    this.perfil  = localStorage.getItem('role');
+ }
 
   menuItem = signal<MenuItem[]>([
     {
@@ -56,7 +66,7 @@ export class CustomSidenavComponent {
     {
       icon: 'exit_to_app',
       label: 'Sair',
-      route: 'sair'
+      route: 'logout'
     },
   ]);
 
