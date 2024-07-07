@@ -32,28 +32,33 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.showMenu.subscribe(
-      exibir => {
-        this.mostraMenu = exibir;
-        localStorage.setItem('menu', this.mostraMenu.toString());
+    if (typeof localStorage !== 'undefined') {
+      this.authService.showMenu.subscribe(
+        exibir => {
+          this.mostraMenu = exibir;
+          localStorage.setItem('menu', this.mostraMenu.toString());
+        }
+      );
+
+      let token = localStorage.getItem('token');
+      this.userLogin = localStorage.getItem('userLogin');
+      this.perfil = localStorage.getItem('role');
+
+      if (token) {
+        this.hideMenu.next(true);
+      } else {
+        this.hideMenu.next(false);
       }
-    );
 
-    let token = localStorage.getItem('token');
-    this.userLogin = localStorage.getItem('userLogin');
-    this.perfil = localStorage.getItem('role');
+      this.hideMenu.subscribe(novoValor => {
+        this.mostraMenu = novoValor;
+      });
 
-    if (token) {
-      this.hideMenu.next(true);
+      this.cd.detectChanges();
     } else {
-      this.hideMenu.next(false);
+      console.error('localStorage is not available.');
     }
 
-    this.hideMenu.subscribe(novoValor => {
-      this.mostraMenu = novoValor;
-    });
-
-    this.cd.detectChanges();
     this.router.navigate(['/login']);
 
   }

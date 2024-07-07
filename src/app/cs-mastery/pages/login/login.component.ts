@@ -19,6 +19,7 @@ export class LoginComponent {
   readonly form!: FormGroup;
   private readonly returnUrl: string;
   private _destroySub$ = new Subject<void>();
+  mensagem: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -35,16 +36,18 @@ export class LoginComponent {
   }
 
   public ngOnInit(): void {
-
+    this.mensagem = '';
     this.form.patchValue({
       login: '',
       senha: ''
     });
 
-    if (localStorage) {
+    if (typeof localStorage !== 'undefined') {
       localStorage.setItem('token', '');
       localStorage.setItem('userLogin', '');
       localStorage.setItem('role', '');
+    } else {
+      console.error('localStorage is not available.');
     }
 
   }
@@ -57,20 +60,21 @@ export class LoginComponent {
     this.authService.login(this.form.value).subscribe({
       next: data => {
         console.log(data);
-        const token = JSON.parse(JSON.stringify(data)).token;
-        const user = JSON.parse(JSON.stringify(data)).user;
-        const role = JSON.parse(JSON.stringify(data)).role;
+        const token = data.token;
+        if (typeof localStorage !== 'undefined') {
+          if (token) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('userLogin', data.login);
+            localStorage.setItem('role', data.role);
+            localStorage.setItem('type', data.type);
 
-        console.log('Token - ', token);
-        console.log('User - ', user);
-        console.log('Role - ', role);
+            this.loginValid = true;
+            this.router.navigate(['/dashboard']);
+          } else {
+            this.mensagem = 'Usuário ou senha inválidos.'
+          }
+        }
 
-        localStorage.setItem('token', token);
-        localStorage.setItem('userLogin', user);
-        localStorage.setItem('role', role);
-
-        this.loginValid = true;
-        this.router.navigate(['/dashboard']);
       },
       error: error => {
         console.log(error);

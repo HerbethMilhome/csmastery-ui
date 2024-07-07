@@ -55,40 +55,40 @@ export class AtendenteFormComponent {
   onSubmit() {
     if(this.form.value.id) {
       this.service.updade(this.form.value)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.openSnackBar(
             'Atendente cadastrado com sucesso!.',
             'Fechar'
             );
             this.onCancel();
         },
-        error => {
+        error: error => {
           let mensagem = error.error.message.split('Detalhe: ')[1]?.split(']')[0];
           this.openSnackBar(
             'Erro ao salvar. Motivo: ' + mensagem,
             'Fechar'
             );
         }
-      );
+      });
     } else {
       this.service.save(this.form.value)
-      .subscribe(
-        data => {
+      .subscribe({
+        next: data => {
           this.openSnackBar(
             'Atendente cadastrado com sucesso!.',
             'Fechar'
             );
             this.onCancel();
         },
-        error => {
-          let mensagem = error.error.message.split('Detalhe: ')[1]?.split(']')[0];
+        error: error => {
+          let mensagem = error.message.split('Detalhe: ')[1]?.split(']')[0];
           this.openSnackBar(
             'Erro ao salvar. Motivo: ' + mensagem,
             'Fechar'
             );
         }
-      );
+      });
     }
   }
 

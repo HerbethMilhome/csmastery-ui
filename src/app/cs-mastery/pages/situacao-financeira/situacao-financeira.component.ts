@@ -3,6 +3,7 @@ import { FormGroup, ReactiveFormsModule, UntypedFormBuilder, Validators } from '
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
+import { ColorPickerModule } from 'ngx-color-picker';
 import { catchError, Observable, of } from 'rxjs';
 
 import { AppMaterialModule } from '../../../shared/app-material/app-material.module';
@@ -10,8 +11,6 @@ import { ConfirmationDialogComponent } from '../../../shared/components/confirma
 import { ErrorDialogComponent } from '../../../shared/components/error-dialog/error-dialog.component';
 import { SituacaoFinanceira } from '../../model/situacao-financeira';
 import { SituacaoFinanceiraService } from '../../services/situacao-financeira.service';
-import { animate, style, transition, trigger } from '@angular/animations';
-import { ColorPickerModule } from 'ngx-color-picker';
 
 @Component({
   selector: 'app-situacao-financeira',

@@ -1,15 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, tap } from 'rxjs';
+import { Observable, catchError, first, map, of, tap } from 'rxjs';
 
 import { Atendente } from '../model/atendente';
+import { error } from 'console';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AtendenteService {
 
-  private readonly API = 'api/atendente';
+  private readonly API = '/api/atendente';
 
   constructor(
     private http: HttpClient
@@ -23,8 +24,17 @@ export class AtendenteService {
     );
   }
 
-  save(atendente: Atendente) {
+  save(atendente: Atendente): Observable<Atendente>  {
     return this.http.post<Atendente>(this.API, atendente).pipe(first());
+    // return this.http.post<Atendente>(this.API, atendente).pipe(
+    //   map(response => {
+    //     return response;
+    //   }), catchError (error => {
+    //     console.error('Erro ao salvar o atendente: ', error);
+    //     // Retorne um Observable vazio ou um valor default
+    //     return of(null as unknown as Atendente);
+    //   })
+    // );
   }
 
   updade(atendente: Atendente) {

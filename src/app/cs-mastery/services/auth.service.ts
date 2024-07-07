@@ -3,6 +3,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 
 import { AuthUser } from '../model/auth-user';
+import { TokenDto } from '../model/dto/token-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -17,12 +18,12 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
-  login(login: AuthUser): Observable<string> {
+  login(login: AuthUser): Observable<TokenDto> {
 
-    return this.http.post<string>(`${this.API}/login`, login).pipe(
+    return this.http.post<TokenDto>(`${this.API}/login`, login).pipe(
       map(response => {
-        console.log('Resposta do serviço de login:', response);
-        let token = JSON.parse(JSON.stringify(response)).token
+        console.log('Resposta do serviço de login: ', response);
+        const token = response.token;
         if (token) {
           this.showMenu.emit(true);
         } else {
@@ -31,7 +32,7 @@ export class AuthService {
 
         return response;
       }), (error) => {
-        console.error('Erro ao fazer login:', error);
+        console.error('Erro ao fazer login: ', error);
         this.showMenu.emit(false);
         return error;
       }
