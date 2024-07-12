@@ -26,15 +26,6 @@ export class AtendenteService {
 
   save(atendente: Atendente): Observable<Atendente>  {
     return this.http.post<Atendente>(this.API, atendente).pipe(first());
-    // return this.http.post<Atendente>(this.API, atendente).pipe(
-    //   map(response => {
-    //     return response;
-    //   }), catchError (error => {
-    //     console.error('Erro ao salvar o atendente: ', error);
-    //     // Retorne um Observable vazio ou um valor default
-    //     return of(null as unknown as Atendente);
-    //   })
-    // );
   }
 
   updade(atendente: Atendente) {
