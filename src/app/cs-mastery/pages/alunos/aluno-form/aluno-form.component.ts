@@ -132,6 +132,11 @@ export class AlunoFormComponent implements OnInit{
   }
 
   onSubmit() {
+
+    if (!this.form.value.endereco.logradouro) {
+      this.form.value.endereco = null;
+    }
+
     if(this.form.value.id) {
       this.service.updade(this.form.value)
       .subscribe(
@@ -143,7 +148,7 @@ export class AlunoFormComponent implements OnInit{
             this.onCancel();
         },
         error => {
-          let mensagem = error.error.message.split('Detalhe: ')[1]?.split(']')[0];
+          let mensagem = error?.error.message.split('Detalhe: ')[1]?.split(']')[0];
           this.openSnackBar(
             'Erro ao salvar. Motivo: ' + mensagem,
             'Fechar'
@@ -180,7 +185,7 @@ export class AlunoFormComponent implements OnInit{
   }
 
   disableSave() {
-    return this.form.invalid || this.selectedAtendente.length == 0;
+    return this.form.invalid || this.selectedAtendente == null || this.selectedAtendente?.length == 0;
   }
 
   checkMentoria() {

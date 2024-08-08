@@ -1,0 +1,4 @@
+<input type="file" #fileInput hidden="true" (change)="onFileChange($event)" accept=".xlsx">
+<button (click)="fileInput.click()" mat-raised-button color="primary" aria-label="Adicionar Aluno">
+  <mat-icon>upload_file</mat-icon> Importar
+</button>

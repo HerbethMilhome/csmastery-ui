@@ -48,7 +48,7 @@ export class AtendenteFormComponent {
         telefone: atend.telefone
       });
 
-      this.alunos = atend.alunos;
+      //this.alunos = atend.alunos;
     }
   }
 

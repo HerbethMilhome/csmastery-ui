@@ -39,4 +39,9 @@ export class AlunosService {
     return this.http.delete<Aluno>(`${this.API}/delete/${id}`).pipe(first());
   }
 
+  saveAlunoImport(listaAluno: Aluno[]) {
+    const url = `${this.API}/import`;
+    return this.http.post<Aluno[]>(url, listaAluno).pipe(first());
+  }
+
 }
