@@ -13,6 +13,7 @@ import { ErrorDialogComponent } from '../../../../shared/components/error-dialog
 import { CategoriaPipe } from '../../../../shared/pipes/categoria.pipe';
 import { Aluno } from '../../../model/aluno';
 import { AlunosService } from '../../../services/alunos.service';
+import { ImportAlunoDialogComponent } from '../aluno-import/import-aluno-dialog/import-aluno-dialog.component';
 
 @Component({
   selector: 'app-alunos-list',
@@ -53,7 +54,7 @@ export class AlunosListComponent implements OnInit {
 
   onDelete(aluno: Aluno) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: 'Tem certeza que deseja remover?'
+      data: 'Tem certeza que deseja remover o item?'
     });
 
     dialogRef.afterClosed().subscribe((result: boolean) => {

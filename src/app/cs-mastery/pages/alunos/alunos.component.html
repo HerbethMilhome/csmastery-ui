@@ -5,7 +5,9 @@
       <button (click)="newAluno()" mat-raised-button color="primary" aria-label="Adicionar Aluno" class="margin-right-button">
         <mat-icon>add</mat-icon> Adicionar
       </button>
-      <app-aluno-import></app-aluno-import>
+      <button (click)="onImport()" mat-raised-button color="primary" aria-label="Adicionar Aluno">
+        <mat-icon>upload_file</mat-icon> Importar
+      </button>
     </p>
 
     <mat-toolbar color="primary">Alunos</mat-toolbar>

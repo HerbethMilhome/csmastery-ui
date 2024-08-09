@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Importação de alunos.</h2>
+<mat-dialog-content>
+  <p>Para realizar a importação, o arquivo XLSX deve seguir o modelo abaixo:</p>
+  <ul>
+    <li><strong>Nome:</strong> A primeira coluna deve conter o nome completo do aluno.</li>
+    <li><strong>Telefone:</strong> A segunda coluna deve conter o número de telefone do aluno.</li>
+    <li><strong>E-mail:</strong> A terceira coluna deve conter o endereço de e-mail do aluno.</li>
+  </ul>
+  <p>Certifique-se de que o arquivo não contenha colunas adicionais e que os dados estejam corretamente organizados conforme o modelo.</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <app-aluno-import class="margin-right-button"></app-aluno-import>
+  <button mat-button mat-dialog-close>Fechar</button>
+</mat-dialog-actions>
