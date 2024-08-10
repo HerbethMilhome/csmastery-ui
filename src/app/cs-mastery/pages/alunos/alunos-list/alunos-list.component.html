@@ -1,6 +1,6 @@
 
-<div *ngIf="alunos$ | async as alunos; else loading">
-  <mat-table [dataSource]="alunos" >
+<div *ngIf="alunosPage | async as alunosPage; else loading">
+  <mat-table [dataSource]="alunosPage.alunos" >
 
     <ng-container matColumnDef="nome">
       <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
@@ -37,6 +37,14 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+  <mat-paginator [pageSizeOptions]="[10, 25, 50]"
+                 showFirstLastButtons
+                 [pageIndex]="pageIndex"
+                 [pageSize]="pageSize"
+                 [length]="alunosPage?.totalElements"
+                 (page)="refresh($event)"
+                 aria-label="Selecione a página de alunos">
+  </mat-paginator>
 </div>
 
 <ng-template #loading>
