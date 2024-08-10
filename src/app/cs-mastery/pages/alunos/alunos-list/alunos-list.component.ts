@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxMaskDirective } from 'ngx-mask';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 
 import { AppMaterialModule } from '../../../../shared/app-material/app-material.module';
 import {
@@ -12,8 +13,8 @@ import {
 import { ErrorDialogComponent } from '../../../../shared/components/error-dialog/error-dialog.component';
 import { CategoriaPipe } from '../../../../shared/pipes/categoria.pipe';
 import { Aluno } from '../../../model/aluno';
+import { AlunoPage } from '../../../model/aluno-page';
 import { AlunosService } from '../../../services/alunos.service';
-import { ImportAlunoDialogComponent } from '../aluno-import/import-aluno-dialog/import-aluno-dialog.component';
 
 @Component({
   selector: 'app-alunos-list',
@@ -24,9 +25,14 @@ import { ImportAlunoDialogComponent } from '../aluno-import/import-aluno-dialog/
 })
 export class AlunosListComponent implements OnInit {
 
-  public alunos$: Observable<Aluno[]> | null = null;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  public alunosPage: Observable<AlunoPage> | null = null;
 
   readonly displayedColumns: string[] = ['nome', 'email', 'telefone', 'data_entrada', 'actions'];
+
+  pageIndex = 0;
+  pageSize = 0;
 
   constructor(
     private alunosService: AlunosService,
@@ -74,12 +80,20 @@ export class AlunosListComponent implements OnInit {
     this.snackBar.open(message, action, { duration: 5000, verticalPosition: 'top', horizontalPosition: 'center' });
   }
 
-  refresh() {
-    this.alunos$ = this.alunosService.listaAlunos()
+  refresh(pageEvent: PageEvent = {length: 0, pageIndex: 0, pageSize: 10}) {
+    this.alunosPage = this.alunosService.listaAlunos(pageEvent.pageIndex, pageEvent.pageSize)
     .pipe(
+      tap((): any => {
+        this.pageIndex = pageEvent.pageIndex;
+        this.pageSize = pageEvent.pageSize;
+      }),
       catchError(error => {
         this.onError('Erro ao carregar');
-        return of([])
+        return of({
+          alunos: [],
+          totalElements: 0,
+          totalPages: 0
+        } as AlunoPage);
       })
     );
   }

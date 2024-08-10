@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { first, tap } from 'rxjs';
 
 import { Aluno } from '../model/aluno';
+import { AlunoPage } from '../model/aluno-page';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +16,8 @@ export class AlunosService {
     private http: HttpClient
   ) { }
 
-  listaAlunos() {
-    return this.http.get<Aluno[]>(this.API)
+  listaAlunos(page = 0, pageSize = 10) {
+    return this.http.get<AlunoPage>(this.API, {params: {page, pageSize}})
     .pipe(
       first(),
       tap()
