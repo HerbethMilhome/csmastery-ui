@@ -1,5 +1,15 @@
 <mat-card>
+
+  <mat-toolbar color="primary">
+    <span>Cadastro dos alunos</span>
+  </mat-toolbar>
+
   <mat-card-content>
+
+    <mat-form-field class="topLeft8px">
+      <mat-label>Pesquisar por nome</mat-label>
+      <input matInput (input)="onSearchName($event)" placeholder="nome">
+    </mat-form-field>
 
     <p>
       <button (click)="newAluno()" mat-raised-button color="primary" aria-label="Adicionar Aluno" class="margin-right-button">
@@ -10,10 +20,12 @@
       </button>
     </p>
 
-    <mat-toolbar color="primary">Alunos</mat-toolbar>
+    <mat-toolbar color="primary">
+      <span>Alunos</span>
+    </mat-toolbar>
 
     <div class="column-flex mat-elevation-z8">
-      <app-alunos-list></app-alunos-list>
+      <app-alunos-list [filter]="filterName" ></app-alunos-list>
     </div>
 
   </mat-card-content>

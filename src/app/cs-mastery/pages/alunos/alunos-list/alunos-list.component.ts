@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -23,7 +23,7 @@ import { AlunosService } from '../../../services/alunos.service';
   standalone: true,
   imports: [AppMaterialModule, CategoriaPipe, NgxMaskDirective],
 })
-export class AlunosListComponent implements OnInit {
+export class AlunosListComponent implements OnInit, OnChanges {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -31,8 +31,10 @@ export class AlunosListComponent implements OnInit {
 
   readonly displayedColumns: string[] = ['nome', 'email', 'telefone', 'data_entrada', 'actions'];
 
+  @Input() filter: string = '';
+
   pageIndex = 0;
-  pageSize = 0;
+  pageSize = 10;
 
   constructor(
     private alunosService: AlunosService,
@@ -46,6 +48,12 @@ export class AlunosListComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['filter']) {
+      this.applyFilter(this.filter);
+    }
   }
 
   onError(errorMensagem: string) {
@@ -96,6 +104,23 @@ export class AlunosListComponent implements OnInit {
         } as AlunoPage);
       })
     );
+  }
+
+  applyFilter(filter: string) {
+    const filterValue = filter.trim().toLowerCase();
+    this.pageIndex = 0;
+
+    this.alunosPage = this.alunosService.listaAlunos(this.pageIndex, this.pageSize, filterValue)
+      .pipe(
+        catchError(error => {
+          this.onError('Erro ao carregar');
+          return of({
+            alunos: [],
+            totalElements: 0,
+            totalPages: 0
+          } as AlunoPage);
+        })
+      );
   }
 
 }
