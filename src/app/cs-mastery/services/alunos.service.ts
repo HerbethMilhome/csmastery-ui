@@ -16,8 +16,8 @@ export class AlunosService {
     private http: HttpClient
   ) { }
 
-  listaAlunos(page = 0, pageSize = 10) {
-    return this.http.get<AlunoPage>(this.API, {params: {page, pageSize}})
+  listaAlunos(page = 0, pageSize = 10, filter = '') {
+    return this.http.get<AlunoPage>(this.API, {params: {page, pageSize, filter}})
     .pipe(
       first(),
       tap()
