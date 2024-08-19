@@ -1,17 +1,17 @@
 <mat-card>
 
-  <mat-toolbar color="primary">
+  <!-- <mat-toolbar color="primary">
     <span>Cadastro dos alunos</span>
-  </mat-toolbar>
+  </mat-toolbar> -->
 
   <mat-card-content>
 
-    <mat-form-field class="topLeft8px">
-      <mat-label>Pesquisar por nome</mat-label>
-      <input matInput (input)="onSearchName($event)" placeholder="nome">
-    </mat-form-field>
-
     <p>
+      <mat-form-field class="topLeft8px margin-right-button">
+        <mat-label>Pesquisar por nome</mat-label>
+        <input matInput (input)="onSearchName($event)" placeholder="nome">
+      </mat-form-field>
+
       <button (click)="newAluno()" mat-raised-button color="primary" aria-label="Adicionar Aluno" class="margin-right-button">
         <mat-icon>add</mat-icon> Adicionar
       </button>

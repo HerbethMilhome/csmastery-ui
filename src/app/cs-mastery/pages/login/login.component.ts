@@ -59,7 +59,7 @@ export class LoginComponent {
   public login(): void {
     this.authService.login(this.form.value).subscribe({
       next: data => {
-        console.log(data);
+        //console.log(data);
         const token = data.token;
         if (typeof localStorage !== 'undefined') {
           if (token) {
