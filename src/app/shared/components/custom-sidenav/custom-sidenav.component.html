@@ -7,7 +7,7 @@
 </div>
 <mat-nav-list>
   <div *ngFor="let item of menuItem()">
-    <a mat-list-item *ngIf="!item.children || item.children.length === 0"
+    <a mat-list-item *ngIf="!item.children || item.children.length === 0 && hasAccess(item.role)"
       [routerLink]="item.route"
       routerLinkActive="selected-menu-item"
       #rla="routerLinkActive"
@@ -17,7 +17,7 @@
         {{ item.label }}
       </span>
     </a>
-    <a mat-list-item *ngIf="item.children && item.children.length > 0"
+    <a mat-list-item *ngIf="item.children && item.children.length > 0 && hasAccess(item.role)"
       routerLinkActive="selected-menu-item"
       #rla="routerLinkActive"
       [matMenuTriggerFor]="menu"
@@ -28,7 +28,7 @@
       </span>
       <mat-menu #menu="matMenu" xPosition="before">
         <div *ngFor="let child of item.children">
-          <button mat-menu-item [routerLink]="child.route">{{ child.label }}</button>
+          <button *ngIf="hasAccess(child.role)" [routerLink]="child.route">{{ child.label }}</button>
         </div>
       </mat-menu>
     </a>
